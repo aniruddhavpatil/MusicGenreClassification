@@ -3,6 +3,7 @@ from sklearn import preprocessing
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.models import load_model
+import sklearn.metrics as metrics
 # from total_arrange import get_data
 import pickle
 # A1, Y, Ate, Yte = get_data('dataset3.csv', 4, 'hot')
@@ -53,6 +54,8 @@ def train():
 			return [0,1,0,0]
 		elif arr=='metal':
 			return [0,0,1,1]
+		elif arr=='reggae':
+			return [1,0,1,0]
 		else:
 			return [1,0,0,0]
 
@@ -82,46 +85,14 @@ def train():
 
 	model.fit(X, Y, nb_epoch=27, batch_size=1)
 	model.save('model.h5')
+	model.summary()
 
-<<<<<<< HEAD
-scores = model.evaluate(X, Y)
-print "Training Accuracy ",scores[1]*100
-
-predictions = model.predict(testX)
-scores = model.evaluate(testX, testY)
-print "Testing Accuracy ",scores[1]*100
-
-pop = []
-jazz = []
-metal = []
-classical = []
-
-for i,val in enumerate(testY):
-	if val == 'pop':
-		pop.append([val,predVal[i]])
-	elif val =='jazz':
-		jazz.append([val,predVal[i]])
-	elif val == 'metal':
-		metal.append([val,predVal[i]])
-	else:
-		classical.append([val,predVal[i]])
-
-pop_accuracy = metrics.accuracy_score(pop[:][0],pop[:][1])
-jazz_accuracy = metrics.accuracy_score(jazz[:][0],jazz[:][1])
-metal_accuracy = metrics.accuracy_score(metal[:][0],metal[:][1])
-classical_accuracy = metrics.accuracy_score(classical[:][0],classical[:][1])
-
-print "Pop accuracy:", pop_accuracy
-print "Jazz accuracy:",jazz_accuracy
-print "Metal accuracy:",metal_accuracy
-print "Classical accuracy:",classical_accuracy
-=======
 	scores = model.evaluate(X, Y)
-	print "\nTraining Accuracy ",scores[1]*100,"\n"
+	print "Training Accuracy ",scores[1]*100
 
 	predictions = model.predict(testX)
 	scores = model.evaluate(testX, testY)
-	print "\nTesting Accuracy ",scores[1]*100,"\n"
+	print "Testing Accuracy ",scores[1]*100
 
 def test(x):
 	model = load_model('../model.h5')
@@ -139,4 +110,4 @@ def test(x):
 	arr = np.reshape(arr,(1,225))
 	pred = model.predict(arr)
 	return pred
->>>>>>> a1e435f6efc564d83511a2536d82f5d4c56dc8c5
+train()
