@@ -1,0 +1,7 @@
+*.pkl
+*.zip
+*.pyc
+*.txt
+test/
+train/
+Datasets/
